@@ -29,7 +29,7 @@ function List(props) {
 
   return (
     <div id={id}>
-      <h3>{children}</h3>
+      {children}
       <ul>
         {list.map(item => {
           return (
@@ -90,7 +90,7 @@ class Board extends Component {
             id="from-list"
             removeButton={false}
           >
-            Todo
+            <h3>Todo</h3>
           </List>
           <List
             list={done}
@@ -98,7 +98,7 @@ class Board extends Component {
             id="done"
             removeButton={true}
           >
-            Done
+            <h3>Done</h3>
           </List>
         </div>
       </div>
