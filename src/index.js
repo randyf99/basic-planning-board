@@ -25,7 +25,7 @@ function Card(props) {
 }
 
 function List(props) {
-  const { list, toDone, id, children } = props;
+  const { list, toDone, id, children, removeButton } = props;
 
   return (
     <div id={id}>
@@ -37,7 +37,7 @@ function List(props) {
               <Card
                 task={item.task}
                 id={item.id}
-                removeButton={false}
+                removeButton={removeButton}
                 toDone={toDone}
               />
             </li>
@@ -84,10 +84,20 @@ class Board extends Component {
           <button id="todo" onClick={this.handleAddTodo}>
             To Do
           </button>
-          <List list={todo} toDone={this.handleToDone} id="from-list">
+          <List
+            list={todo}
+            toDone={this.handleToDone}
+            id="from-list"
+            removeButton={false}
+          >
             Todo
           </List>
-          <List list={done} toDone={this.handleToDone} id="done">
+          <List
+            list={done}
+            toDone={this.handleToDone}
+            id="done"
+            removeButton={true}
+          >
             Done
           </List>
         </div>
