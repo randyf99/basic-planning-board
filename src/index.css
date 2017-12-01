@@ -1,6 +1,27 @@
 * {
   font-family: 'Segoe UI';
 }
+
+#board {
+  max-width: 80%;
+  text-align: center;
+}
+
+#board h1 {
+  text-align: center;
+  color: red;
+}
+
+ul {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  width: 50%;
+  margin: 0 0.5%;
+  display: inline-block;
+  vertical-align: top;
+}
+
 li {
   list-style: none;
   padding: 5px;
@@ -8,24 +29,15 @@ li {
   border-radius: 5px;
   margin: 0 0 5px;
 }
-ul {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  width: 30%;
-  margin: 0 0.5%;
-  display: inline-block;
-  vertical-align: top;
-  display: flex 1;
-}
 
-#board div h3 {
+#board div {
   display: inline-block;
-  width: 30%;
+  width: 45%;
   margin: 1%;
   text-align: center;
 }
 
-#board div h1 {
-  text-align: center;
+#board button {
+  margin: 0;
+  padding: 0;
 }

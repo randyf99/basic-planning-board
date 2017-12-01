@@ -24,19 +24,37 @@ function Card(props) {
   );
 }
 
+function List(props) {
+  const { list, toDone, id, children } = props;
+
+  return (
+    <div id={id}>
+      <h3>{children}</h3>
+      <ul>
+        {list.map(item => {
+          return (
+            <li key={generateId()}>
+              <Card
+                task={item.task}
+                id={item.id}
+                removeButton={false}
+                toDone={toDone}
+              />
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
+
 class Board extends Component {
-  constructor(props) {
-    super(props);
+  state = {
+    todo: [],
+    done: []
+  };
 
-    this.state = {
-      todo: [],
-      done: []
-    };
-    this.handleAddTodo = this.handleAddTodo.bind(this);
-    this.handleToDone = this.handleToDone.bind(this);
-  }
-
-  handleToDone(id) {
+  handleToDone = id => {
     const { todo, done } = this.state;
     const toSave = todo.find(item => item.id == id);
     const newTodo = todo.filter(item => item.id !== id);
@@ -45,48 +63,34 @@ class Board extends Component {
       todo: newTodo,
       done: done.concat(toSave)
     });
-  }
+  };
 
-  handleAddTodo() {
+  handleAddTodo = () => {
     let todo = this.state.todo;
     const diag = window.prompt('Pick your task');
 
     this.setState({
       todo: todo.concat({ task: diag, id: generateId() })
     });
-  }
+  };
 
   render() {
     const { todo, done } = this.state;
 
     return (
       <div id="board">
-        <div>
-          <h1>Planning board</h1>
-          <h3>ToDo</h3>
-          <h3>Done</h3>
+        <h1>Planning board</h1>
+        <div className="lists">
+          <button id="todo" onClick={this.handleAddTodo}>
+            To Do
+          </button>
+          <List list={todo} toDone={this.handleToDone} id="from-list">
+            Todo
+          </List>
+          <List list={done} toDone={this.handleToDone} id="done">
+            Done
+          </List>
         </div>
-        <button id="todo" onClick={this.handleAddTodo}>
-          To Do
-        </button>
-        <ul id="from-list">
-          {todo.map(item => {
-            return (
-              <li key={generateId()}>
-                <Card task={item.task} id={item.id} removeButton={false} toDone={this.handleToDone} />
-              </li>
-            );
-          })}
-        </ul>
-        <ul id="done">
-          {done.map(item => {
-            return (
-              <li key={generateId()}>
-                <Card task={item.task} id={item.id} removeButton={true} toDone={this.handleToDone} />
-              </li>
-            );
-          })}
-        </ul>
       </div>
     );
   }
